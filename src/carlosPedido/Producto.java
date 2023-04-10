@@ -99,7 +99,7 @@ public class Producto extends Producto2 implements carlosPedido.TratamientoFiche
 
 		// Carga de inventario de productos mediante fichero externo
 		ArrayList<String[]> productosList = (ArrayList<String[]>) fileScannerProducto(
-				"C:/Users/Carlos Carrillo/eclipse-workspace/GestionPedidos2/src/carlosPedido/Producto.txt");
+				"C:/Users/Carlos Carrillo/eclipse-workspace/FinalProjectProgramacion/src/Archivos/Producto.txt");
 		String[] nproducto1 = productosList.get(0);
 		String nombreproducto1 = nproducto1[0];
 		Double precio1 = Double.parseDouble(nproducto1[1]);

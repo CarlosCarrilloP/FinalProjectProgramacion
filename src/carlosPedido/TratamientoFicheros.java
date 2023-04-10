@@ -102,7 +102,7 @@ public interface TratamientoFicheros {
 		// Metodo Escribe fichero
 		public static void escribeFichero() {
 
-			String ruta = "C:/Users/Carlos Carrillo/eclipse-workspace/carlosPedido/src/carlosPedido/Cliente.txt";
+			String ruta = "C:/Users/Carlos Carrillo/eclipse-workspace/FinalProjectProgramacion/src/Archivos/Cliente.txt";
 			FileWriter fichero = null;
 			PrintWriter pw = null;
 			try {

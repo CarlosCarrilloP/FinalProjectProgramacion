@@ -15,7 +15,7 @@ public class Pedido {
 	PasarelaDePago pago;
 	Estado estado;
 	String codigoPedido;
-	String rutaTicket = "C:/Users/Carlos Carrillo/eclipse-workspace/GestionPedidos2/src/carlosPedido/Ticket.txt";
+	String rutaTicket = "C:/Users/Carlos Carrillo/eclipse-workspace/FinalProjectProgramacion/src/Archivos/Ticket.txt";
 
 	// Constructor vacío
 	public Pedido() {

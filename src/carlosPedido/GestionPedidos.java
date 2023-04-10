@@ -9,11 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * @author Carlos Carrillo V 0.2.1 Añadida la funcionalidad:
- * Crear un cliente o continuar con uno existente
- * Imprimir ticket una vez finalizada la compra
- * Almacenar nuevos clientes
- * 
+ * @author Carlos Carrillo Proyecto Final Programacion
  *
  */
 public class GestionPedidos implements TratamientoFicheros {
@@ -86,7 +82,8 @@ public class GestionPedidos implements TratamientoFicheros {
 		case 2:
 		    System.out.println(" Has elegido: Continuar con el cliente ya creado");
 		    List<Cliente> clientes = Cliente.leerClientesDesdeArchivo(
-		            "C:/Users/Carlos Carrillo/eclipse-workspace/GestionPedidos2/src/carlosPedido/Cliente.txt");
+		            "C:/Users/Carlos Carrillo/eclipse-workspace/FinalProjectProgramacion/src/Archivos/Cliente.txt");
+		  
 
 		    if (clientes.size() < 3) {
 		        System.out.println("El archivo no contiene suficientes líneas para crear los clientes.");
