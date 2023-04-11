@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Producto extends Producto2 implements carlosPedido.TratamientoFicheros {
+public class Producto extends ProductoAbstract implements carlosPedido.TratamientoFicheros {
 	// Atributos
 	String nombre;
 	double precio;
