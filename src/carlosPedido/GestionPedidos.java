@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import carlosPedidoException.ImporteInvalidoException;
+
 /**
  * @author Carlos Carrillo Proyecto Final Programacion
  *
@@ -325,7 +327,12 @@ public class GestionPedidos implements TratamientoFicheros {
 
 		PasarelaDePago efectivo = new PasarelaDePago();
 
-		efectivo.efectivopago(totalefectivo);
+		try {
+			efectivo.efectivoPago(totalefectivo);
+		} catch (ImporteInvalidoException e) {
+			
+			e.printStackTrace();
+		}
 		sc.close();
 
 	}

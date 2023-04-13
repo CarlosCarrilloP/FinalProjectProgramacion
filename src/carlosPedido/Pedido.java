@@ -136,7 +136,7 @@ public class Pedido {
 		}
 
 	}
-	
+
 	public Producto eliminarProducto(Producto producto) {
 		producto = null;
 		return producto;
@@ -147,57 +147,75 @@ public class Pedido {
 		return String.valueOf(new Date().getTime());
 
 	}
+
 	@Override // Ticket que se imprime por pantalla cuando se realiza el pedido
 	public String toString() {
-	    
-	    StringBuilder sb = new StringBuilder();
 
-	    double totalProducto1 = 0;
-	    double totalProducto2 = 0;
-	    String strProducto1 = "";
-	    String strProducto2 = "";
+		StringBuilder sb = new StringBuilder();
+		double totalProducto1 = 0;
+		double totalProducto2 = 0;
+		String strProducto1 = "";
+		String strProducto2 = "";
 
-	    // Comprobar si el producto 1 está en oferta y obtener el precio a mostrar
-	    if (producto1 != null) {
-	        double precioProducto1 = producto1.getPrecio();
-	        if (producto1.estaEnOferta()) {
-	            precioProducto1 = producto1.getPrecioOferta();
-	        }
+		// Comprobar si el producto 1 está en oferta y obtener el precio a mostrar
+		if (producto1 != null) {
+			double precioProducto1 = producto1.getPrecio();
+			if (producto1.estaEnOferta()) {
+				precioProducto1 = producto1.getPrecioOferta();
+			}
 
-	        totalProducto1 = producto1.getCantidad() * precioProducto1;
-	        strProducto1 = producto1.getCantidad() + "                  " + producto1.getNombre() + "             "
-	                + precioProducto1 + "                  " + totalProducto1 + " € \n";
-	    }
+			totalProducto1 = producto1.getCantidad() * precioProducto1;
+			strProducto1 = producto1.getCantidad() + "                  " + producto1.getNombre() + "             "
+					+ precioProducto1 + "                  " + totalProducto1 + " € \n";
+		}
 
-	    // Comprobar si el producto 2 está en oferta y obtener el precio a mostrar
-	    if (producto2 != null) {
-	        double precioProducto2 = producto2.getPrecio();
-	        if (producto2.estaEnOferta()) {
-	            precioProducto2 = producto2.getPrecioOferta();
-	        }
+		// Comprobar si el producto 2 está en oferta y obtener el precio a mostrar
+		if (producto2 != null) {
+			double precioProducto2 = producto2.getPrecio();
+			if (producto2.estaEnOferta()) {
+				precioProducto2 = producto2.getPrecioOferta();
+			}
 
-	        totalProducto2 = producto2.getCantidad() * precioProducto2;
-	        strProducto2 = producto2.getCantidad() + "                  " + producto2.getNombre() + "             "
-	                + precioProducto2 + "                   " + totalProducto2 + " € \n";
-	    }
+			totalProducto2 = producto2.getCantidad() * precioProducto2;
+			strProducto2 = producto2.getCantidad() + "                  " + producto2.getNombre() + "             "
+					+ precioProducto2 + "                   " + totalProducto2 + " € \n";
+		}
 
-	    double totalPedido = totalProducto1 + totalProducto2;
+		double totalPedido = totalProducto1 + totalProducto2;
 
-	    sb.append("CANTIDAD            PRODUCTO           PRECIO UD.                TOTAL \n")
-	        .append(strProducto1)
-	        .append(strProducto2)
-	        .append(" TOTAL -------------------------------> ")
-	        .append(totalPedido)
-	        .append("  € \n ");
+		sb.append("CANTIDAD            PRODUCTO           PRECIO UD.                TOTAL \n").append(strProducto1)
+				.append(strProducto2).append(" TOTAL -------------------------------> ").append(totalPedido)
+				.append("  € \n ");
 
-	    try (PrintWriter pw = new PrintWriter(new FileWriter(rutaTicket, false))) {//False para que no me guarde los tickets, solo 1, si no cambiar a true
-	        pw.print(sb.toString());
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+		/*
+		 * este fragmento de código se encarga de sobreescribir el contenido del ticket en un
+		 * archivo llamado Ticket.txt, cerrando el recurso adecuadamente al finalizar el
+		 * proceso de escritura.
+		 */
+		try (PrintWriter pw = new PrintWriter(new FileWriter(rutaTicket, false))) {
 
-	    return sb.toString();
+			pw.print(sb.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
+		return sb.toString();
+
+	}
+
+	public double toString2() {
+		double totalPedido = 0;
+		if (producto1 != null) {
+
+			double totalProducto1 = producto1.getCantidad() * producto1.getPrecio();
+			totalPedido += totalProducto1;
+		}
+		if (producto2 != null) {
+			double totalProducto2 = producto2.getCantidad() * producto2.getPrecio();
+			totalPedido += totalProducto2;
+		}
+
+		return totalPedido;
 	}
 
 }

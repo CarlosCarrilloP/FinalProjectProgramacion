@@ -55,15 +55,18 @@ public class Cliente implements TratamientoFicheros {
 	// Metodo setTelefono limita a 9 la longitud del telefono y que empiece por
 	// 6,7,8 o 9
 	public void setTelefono(String telefono) {
-		if (telefono.length() == 9 && (telefono.startsWith("6") || telefono.startsWith("7") || telefono.startsWith("8")
-				|| telefono.startsWith("9"))) {
-
-			this.telefono = telefono;
-		} else {
-			System.out.println("ERROR");
-		}
-
+	    try {
+	        if (telefono.length() == 9 && (telefono.startsWith("6") || telefono.startsWith("7") || telefono.startsWith("8")
+	                || telefono.startsWith("9"))) {
+	            this.telefono = telefono;
+	        } else {
+	            throw new Exception("El número de teléfono es inválido");
+	        }
+	    } catch (Exception e) {
+	        System.out.println(e.getMessage());
+	    }
 	}
+
 
 	public String getDireccion() {
 		return direccion;
