@@ -3,7 +3,7 @@ package carlosPedido;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract class ProductoAbstract implements Imprimible , TratamientoFicheros {
+public abstract class ProductoAbstract implements Imprimible, TratamientoFicheros {
 	// Atributos
 	private String nombre;
 	protected static double precio;
@@ -18,27 +18,24 @@ public abstract class ProductoAbstract implements Imprimible , TratamientoFicher
 		this.fecha_caducidad = fecha_caducidad2;
 		this.setEstado(estado);
 	}
-	//Constructor vacio
+
+	// Constructor vacio
 	public ProductoAbstract() {
 		super();
 	}
 
-	
-	
-	
-	
-	//Aqui compruebo que no está caducado
+	// Aqui compruebo que no está caducado
 	public String getEstado(LocalDate fechaActual) {
-	    if (this.fecha_caducidad == null) {
-	        return "NO PERECEDERO";
-	    }
-	    if (fechaActual.isAfter(this.fecha_caducidad)) {
-	        return "CADUCADO";
-	    } else if (fechaActual.plusDays(5).isAfter(this.fecha_caducidad)) {
-	        return "OFERTA";
-	    } else {
-	        return "EN BUEN ESTADO";
-	    }
+		if (this.fecha_caducidad == null) {
+			return "NO PERECEDERO";
+		}
+		if (fechaActual.isAfter(this.fecha_caducidad)) {
+			return "CADUCADO";
+		} else if (fechaActual.plusDays(5).isAfter(this.fecha_caducidad)) {
+			return "OFERTA";
+		} else {
+			return "EN BUEN ESTADO";
+		}
 	}
 
 	public void setEstado(String estado) {
@@ -59,36 +56,29 @@ public abstract class ProductoAbstract implements Imprimible , TratamientoFicher
 	public void imprimir() {
 
 	}
-	// Método para determinar si el producto está próximo a su fecha de caducidad y debe aplicar un descuento
-    public boolean estaEnOferta() {
-        LocalDate hoy = LocalDate.now();
-        LocalDate caducidad = obtener_caducidad();
-        long diasHastaCaducidad = hoy.until(caducidad, ChronoUnit.DAYS);
-        if (diasHastaCaducidad < 5) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    //Método para obtener el precio del producto aplicando un posible descuento por oferta
-    
-    public double getPrecioOferta() {
-        if (estaEnOferta()) {
-            return  precio * 0.7; // Aplica un descuento del 30%
-        } else {
-            return precio;
-        }
-    }
-    
- // Método toString para imprimir el producto con su precio de oferta (si corresponde)
-    @Override
-    public String toString() {
-        if (estaEnOferta()) {
-            return "OFERTA - " + nombre + " - " + getPrecioOferta() + " euros";
-        } else {
-            return nombre + " - " + precio + " euros";
-        }
-    }
+
+	// Método para determinar si el producto está próximo a su fecha de caducidad y
+	// debe aplicar un descuento
+	public boolean estaEnOferta() {
+		LocalDate hoy = LocalDate.now();
+		LocalDate caducidad = obtener_caducidad();
+		long diasHastaCaducidad = hoy.until(caducidad, ChronoUnit.DAYS);
+		if (diasHastaCaducidad < 5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Método para obtener el precio del producto aplicando un posible descuento por
+	// oferta
+
+	public double getPrecioOferta() {
+		if (estaEnOferta()) {
+			return precio * 0.7; // Aplica un descuento del 30%
+		} else {
+			return precio;
+		}
+	}
 
 }

@@ -156,16 +156,31 @@ public class Pedido {
 	    double totalProducto2 = 0;
 	    String strProducto1 = "";
 	    String strProducto2 = "";
+
+	    // Comprobar si el producto 1 está en oferta y obtener el precio a mostrar
 	    if (producto1 != null) {
-	        totalProducto1 = producto1.getCantidad() * producto1.getPrecio();
+	        double precioProducto1 = producto1.getPrecio();
+	        if (producto1.estaEnOferta()) {
+	            precioProducto1 = producto1.getPrecioOferta();
+	        }
+
+	        totalProducto1 = producto1.getCantidad() * precioProducto1;
 	        strProducto1 = producto1.getCantidad() + "                  " + producto1.getNombre() + "             "
-	                + producto1.getPrecio() + "                  " + totalProducto1 + " € \n";
+	                + precioProducto1 + "                  " + totalProducto1 + " € \n";
 	    }
+
+	    // Comprobar si el producto 2 está en oferta y obtener el precio a mostrar
 	    if (producto2 != null) {
-	        totalProducto2 = producto2.getCantidad() * producto2.getPrecio();
+	        double precioProducto2 = producto2.getPrecio();
+	        if (producto2.estaEnOferta()) {
+	            precioProducto2 = producto2.getPrecioOferta();
+	        }
+
+	        totalProducto2 = producto2.getCantidad() * precioProducto2;
 	        strProducto2 = producto2.getCantidad() + "                  " + producto2.getNombre() + "             "
-	                + producto2.getPrecio() + "                   " + totalProducto2 + " € \n";
+	                + precioProducto2 + "                   " + totalProducto2 + " € \n";
 	    }
+
 	    double totalPedido = totalProducto1 + totalProducto2;
 
 	    sb.append("CANTIDAD            PRODUCTO           PRECIO UD.                TOTAL \n")
@@ -182,23 +197,7 @@ public class Pedido {
 	    }
 
 	    return sb.toString();
-	}
 
-
-	public double toString2() {
-		double totalPedido = 0;
-		if (producto1 != null) {
-			
-			double totalProducto1 = producto1.getCantidad() * producto1.getPrecio();
-			totalPedido+=totalProducto1;
-		}
-		if (producto2 != null) {
-			double totalProducto2 = producto2.getCantidad() * producto2.getPrecio();
-			totalPedido += totalProducto2;
-		}
-		
-		
-		return totalPedido;
 	}
 
 }
