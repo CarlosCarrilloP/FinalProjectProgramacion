@@ -66,13 +66,12 @@ public class Comida extends ProductoAbstract {
 
 	@Override
 	public void detalle_producto() {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void comprobarFechaCaducidad() {
-		// TODO Auto-generated method stub
 		
 	}
 	

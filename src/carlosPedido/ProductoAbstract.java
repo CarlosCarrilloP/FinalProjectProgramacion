@@ -25,18 +25,20 @@ public abstract class ProductoAbstract implements Imprimible, TratamientoFichero
 	}
 
 	// Aqui compruebo que no está caducado
-	public String getEstado(LocalDate fechaActual) {
-		if (this.fecha_caducidad == null) {
-			return "NO PERECEDERO";
-		}
-		if (fechaActual.isAfter(this.fecha_caducidad)) {
-			return "CADUCADO";
-		} else if (fechaActual.plusDays(5).isAfter(this.fecha_caducidad)) {
-			return "OFERTA";
-		} else {
-			return "EN BUEN ESTADO";
-		}
+	public String getEstado() {
+	    LocalDate fechaActual = LocalDate.now();
+	    if (this.fecha_caducidad == null) {
+	        return "NO PERECEDERO";
+	    }
+	    if (fechaActual.isAfter(this.fecha_caducidad)) {
+	        return "CADUCADO";
+	    } else if (fechaActual.plusDays(5).isAfter(this.fecha_caducidad)) {
+	        return "OFERTA";
+	    } else {
+	        return "EN BUEN ESTADO";
+	    }
 	}
+
 
 	public void setEstado(String estado) {
 		this.estado = estado;
@@ -57,22 +59,26 @@ public abstract class ProductoAbstract implements Imprimible, TratamientoFichero
 
 	}
 
-	// Método para determinar si el producto está próximo a su fecha de caducidad y
-	// debe aplicar un descuento
+	// Método para determinar si el producto está próximo a su fecha de caducidad y debe aplicar un descuento
+	 
 	public boolean estaEnOferta() {
-		LocalDate hoy = LocalDate.now();
-		LocalDate caducidad = obtener_caducidad();
-		long diasHastaCaducidad = hoy.until(caducidad, ChronoUnit.DAYS);
-		if (diasHastaCaducidad < 5) {
-			return true;
-		} else {
-			return false;
-		}
+	    LocalDate hoy = LocalDate.now();
+	    LocalDate caducidad = obtener_caducidad();
+	    if (caducidad == null) {
+	        return false;
+	    }
+	    long diasHastaCaducidad = hoy.until(caducidad, ChronoUnit.DAYS);
+	    if (diasHastaCaducidad < 5) {
+	        return true;
+	    } else {
+	        return false;
+	    }
 	}
 
-	// Método para obtener el precio del producto aplicando un posible descuento por
-	// oferta
 
+
+	// Método para obtener el precio del producto aplicando un posible descuento por oferta
+	
 	public double getPrecioOferta() {
 		if (estaEnOferta()) {
 			return precio * 0.7; // Aplica un descuento del 30%

@@ -151,7 +151,8 @@ public class GestionPedidos implements TratamientoFicheros {
 			for (int i = 0; i < prueba.size(); i++) {
 			    System.out.println((i+1) + ". " + prueba.get(i).getNombre() + " " + prueba.get(i).getPrecio() + "€");
 			}
-
+			
+			
 			int p;
 			Pedido pedido = new Pedido();
 			int stockRestante = 0;

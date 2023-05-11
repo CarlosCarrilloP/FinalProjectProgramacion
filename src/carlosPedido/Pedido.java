@@ -177,14 +177,14 @@ public class Pedido {
 			}
 
 			totalProducto2 = producto2.getCantidad() * precioProducto2;
-			strProducto2 = producto2.getCantidad() + "                  " + producto2.getNombre() + "             "
-					+ precioProducto2 + "                   " + totalProducto2 + " € \n";
+			strProducto2 = producto2.getCantidad() + "                  " + producto2.getNombre() + "                     "
+				        	+ precioProducto2 + "                      " + totalProducto2 + " € \n";
 		}
 
 		double totalPedido = totalProducto1 + totalProducto2;
 
-		sb.append("CANTIDAD            PRODUCTO           PRECIO UD.                TOTAL \n").append(strProducto1)
-				.append(strProducto2).append(" TOTAL -------------------------------> ").append(totalPedido)
+		sb.append("CANTIDAD            PRODUCTO           PRECIO UD.                     TOTAL \n").append(strProducto1)
+				.append(strProducto2).append(" TOTAL ------------------------------------------------------> ").append(totalPedido)
 				.append("  € \n ");
 
 		/*
