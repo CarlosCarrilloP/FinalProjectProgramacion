@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import carlosPedidoException.ImporteInvalidoException;
+import interfazGrafica.CrearCliente;
 
 /**
  * @author Carlos Carrillo Proyecto Final Programacion
@@ -129,6 +132,7 @@ public class GestionPedidos implements TratamientoFicheros {
 		
 		if (telefono.equals(cliente1.getTelefono())) {
 			System.out.println("Hola Cliente1:");
+			
 			esCliente1 = true;
 		} else if (telefono.equals(cliente2.getTelefono())) {
 			System.out.println("Hola Cliente2:");
@@ -336,5 +340,15 @@ public class GestionPedidos implements TratamientoFicheros {
 		}
 		sc.close();
 
+	}
+
+	private  void crearCliente() {
+		
+		    // Aquí va la lógica para abrir el JFrame crearCliente
+		    JFrame crearClienteFrame = new CrearCliente();
+		    crearClienteFrame.setVisible(true); // Mostrar el JFrame
+		
+
+		
 	}
 }

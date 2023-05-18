@@ -1,0 +1,5 @@
+Refresco Cola,23/04/2030,Disponible,0.89, 10
+Refresco Naranja,23/04/2024,Disponible,0.89, 10
+Agua,17/04/2025,Disponible,0.55, 10
+Zumo Naranja,31/03/2028,Disponible,1.20, 10
+Monster Energy,16/07/2023,Disponible,1.59, 10
