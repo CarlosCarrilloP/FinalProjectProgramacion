@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -30,12 +31,13 @@ public class RealizarPedido2 extends JFrame {
 		lblNewLabel.setBounds(183, 20, 284, 20);
 		contentPane.add(lblNewLabel);
 
-		JButton btnNewButton = new JButton("Producto 1");
-		btnNewButton.setBounds(113, 117, 114, 75);
+		JButton btnNewButton = new JButton("Refresco Cola");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 10));
+		btnNewButton.setBounds(69, 117, 158, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 1");
+				solicitarCantidad("Refresco Cola");
 				dispose(); // Cierra la ventana actual
 			}
 		});
@@ -49,52 +51,60 @@ public class RealizarPedido2 extends JFrame {
 		JButton btnNewButton_3 = new JButton("Terminar Pedido");
 		btnNewButton_3.setBounds(228, 298, 168, 39);
 		contentPane.add(btnNewButton_3);
+		btnNewButton_3.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	dispose(); // Cerrar la ventana secundaria
+		    	 // Crear y mostrar el JFrame "Final"
+				Final Final = new Final();
+		        Final.setVisible(true);
+		    }
+		});
 
-		JButton btnNewButton_1 = new JButton("Producto 2");
-		btnNewButton_1.setBounds(253, 117, 114, 75);
+		JButton btnNewButton_1 = new JButton("Refresco Naranja");
+		btnNewButton_1.setBounds(237, 117, 159, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 2");
+				solicitarCantidad("Refresco Naranja");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Producto 3");
-		btnNewButton_2.setBounds(397, 117, 114, 75);
+		JButton btnNewButton_2 = new JButton("Agua");
+		btnNewButton_2.setBounds(408, 117, 128, 75);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 3");
+				solicitarCantidad("Agua");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_2);
 
-		JButton btnNewButton_4 = new JButton("Producto 4");
-		btnNewButton_4.setBounds(183, 213, 114, 75);
+		JButton btnNewButton_4 = new JButton("Zumo de Naranja");
+		btnNewButton_4.setBounds(129, 213, 168, 75);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 4");
+				solicitarCantidad("Zumo Naranja");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_4);
 
-		JButton btnNewButton_5 = new JButton("Producto 5");
-		btnNewButton_5.setBounds(324, 213, 114, 75);
+		JButton btnNewButton_5 = new JButton("Monster Energy");
+		btnNewButton_5.setBounds(324, 213, 143, 75);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 5");
+				solicitarCantidad("Monster Energy");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_5);
 	}
-
+	
 	public void solicitarCantidad(String producto) {
 		JDialog dialog = new JDialog(this, "Cantidad", true);
 		dialog.setSize(300, 200);
@@ -107,23 +117,34 @@ public class RealizarPedido2 extends JFrame {
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 
-				dialog.dispose(); // Cerrar la ventana secundaria
-				 // Crear y mostrar el JFrame "Final"
-			    JFrame finalFrame = new JFrame("Final");
-			    finalFrame.setVisible(true);
-			    
-			}
-		});
+	     
+	            String cantidad = cantidadField.getText();
+	            try {
+	                int cantidadNumerica = Integer.parseInt(cantidad);
 
-		dialog.getContentPane().add(cantidadLabel);
-		dialog.getContentPane().add(cantidadField);
-		dialog.getContentPane().add(okButton);
+	                if (cantidadNumerica >= 1 && cantidadNumerica <= 30) {
+	                    JOptionPane.showMessageDialog(null, "Cantidad ingresada para " + producto + ": " + cantidad);
+	                    dialog.dispose(); // Cerrar la ventana secundaria
+	                    Final Final = new Final();
+	    		        Final.setVisible(true);
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "La cantidad debe estar entre 1 y 30 unidades.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    cantidadField.setText(""); // Limpiar el campo de texto
+		                cantidadField.requestFocus(); // Colocar el foco en el campo de texto
+	                }
+	            } catch (NumberFormatException ex) {
+	                JOptionPane.showMessageDialog(null, "La cantidad ingresada no es un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                // Volver a solicitar la cantidad
+	                cantidadField.setText(""); // Limpiar el campo de texto
+	                cantidadField.requestFocus(); // Colocar el foco en el campo de texto
+	            }
+	        }
+	    });
+	    dialog.getContentPane().add(cantidadLabel);
+	    dialog.getContentPane().add(cantidadField);
+	    dialog.getContentPane().add(okButton);
 
-		dialog.setVisible(true);
-		
-		
-		
+	    dialog.setVisible(true);
 	}
 	
 	public static void main(String[] args) {

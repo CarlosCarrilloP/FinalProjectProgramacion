@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -33,12 +34,12 @@ public class RealizarPedido1 extends JFrame {
 		lblNewLabel.setBounds(205, 20, 208, 20);
 		contentPane.add(lblNewLabel);
 
-		JButton btnNewButton = new JButton("Producto 1");
-		btnNewButton.setBounds(113, 117, 114, 75);
+		JButton btnNewButton = new JButton("Refresco Cola");
+		btnNewButton.setBounds(68, 117, 159, 75);
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 1");
+				solicitarCantidad("Refresco Cola");
 				dispose(); // Cierra la ventana actual
 			
 				
@@ -64,45 +65,45 @@ public class RealizarPedido1 extends JFrame {
 		});
 
 
-		JButton btnNewButton_1 = new JButton("Producto 2");
-		btnNewButton_1.setBounds(253, 117, 114, 75);
+		JButton btnNewButton_1 = new JButton("Refresco Naranja");
+		btnNewButton_1.setBounds(237, 117, 176, 75);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 2");
+				solicitarCantidad("Refresco Naranja");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_1);
 
-		JButton btnNewButton_2 = new JButton("Producto 3");
-		btnNewButton_2.setBounds(397, 117, 114, 75);
+		JButton btnNewButton_2 = new JButton("Agua");
+		btnNewButton_2.setBounds(422, 117, 146, 75);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 3");
+				solicitarCantidad("Agua");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_2);
 
-		JButton btnNewButton_4 = new JButton("Producto 4");
-		btnNewButton_4.setBounds(183, 213, 114, 75);
+		JButton btnNewButton_4 = new JButton("Zumo Naranja");
+		btnNewButton_4.setBounds(151, 213, 168, 75);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 4");
+				solicitarCantidad("Zumo Naranja");
 				dispose(); // Cierra la ventana actual
 			}
 		});
 		contentPane.add(btnNewButton_4);
 
-		JButton btnNewButton_5 = new JButton("Producto 5");
-		btnNewButton_5.setBounds(324, 213, 114, 75);
+		JButton btnNewButton_5 = new JButton("Monster Energy");
+		btnNewButton_5.setBounds(349, 213, 176, 75);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				solicitarCantidad("Producto 5");
+				solicitarCantidad("Monster Energy");
 				dispose(); // Cierra la ventana actual
 			}
 		});
@@ -110,32 +111,45 @@ public class RealizarPedido1 extends JFrame {
 	}
 
 	public void solicitarCantidad(String producto) {
-		JDialog dialog = new JDialog(this, "Cantidad", true);
-		dialog.setSize(300, 300); //100, 100, 613, 384
-		dialog.getContentPane().setLayout(new FlowLayout());
+	    JDialog dialog = new JDialog(this, "Cantidad", true);
+	    dialog.setSize(300, 300);
+	    dialog.getContentPane().setLayout(new FlowLayout());
 
-		JLabel cantidadLabel = new JLabel("Cantidad para " + producto + ":");
-		JTextField cantidadField = new JTextField(10);
+	    JLabel cantidadLabel = new JLabel("Cantidad para " + producto + ":");
+	    JTextField cantidadField = new JTextField(10);
 
-		JButton okButton = new JButton("ENVIAR");
-		okButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String cantidad = cantidadField.getText();
-				
-				System.out.println("Cantidad ingresada para " + producto + ": " + cantidad);
+	    JButton okButton = new JButton("ENVIAR");
+	    okButton.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            String cantidad = cantidadField.getText();
+	            try {
+	                int cantidadNumerica = Integer.parseInt(cantidad);
 
-				dialog.dispose(); // Cerrar la ventana secundaria
-				RealizarPedido2 realizarPedido2 = new RealizarPedido2();
-		        realizarPedido2.setVisible(true);
-			}
-		});
+	                if (cantidadNumerica >= 1 && cantidadNumerica <= 30) {
+	                    JOptionPane.showMessageDialog(null, "Cantidad ingresada para " + producto + ": " + cantidad);
+	                    dialog.dispose(); // Cerrar la ventana secundaria
+	                    RealizarPedido2 realizarPedido2 = new RealizarPedido2();
+	                    realizarPedido2.setVisible(true);
+	                } else {
+	                    JOptionPane.showMessageDialog(null, "La cantidad debe estar entre 1 y 30 unidades.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    cantidadField.setText(""); // Limpiar el campo de texto
+		                cantidadField.requestFocus(); // Colocar el foco en el campo de texto
+	                }
+	            } catch (NumberFormatException ex) {
+	                JOptionPane.showMessageDialog(null, "La cantidad ingresada no es un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+	                // Volver a solicitar la cantidad
+	                cantidadField.setText(""); // Limpiar el campo de texto
+	                cantidadField.requestFocus(); // Colocar el foco en el campo de texto
+	            }
+	        }
+	    });
 
-		dialog.getContentPane().add(cantidadLabel);
-		dialog.getContentPane().add(cantidadField);
-		dialog.getContentPane().add(okButton);
+	    dialog.getContentPane().add(cantidadLabel);
+	    dialog.getContentPane().add(cantidadField);
+	    dialog.getContentPane().add(okButton);
 
-		dialog.setVisible(true);
+	    dialog.setVisible(true);
 	}
 
 	public static void main(String[] args) {
