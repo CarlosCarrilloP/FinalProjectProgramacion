@@ -21,7 +21,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class RealizarPedido2 extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	public String nombreProductoSeleccionado1;
+    public int cantidadProductoSeleccionada1;
 	
 	private List<String> cargarNombresProductos(String rutaArchivo) {
         List<String> nombresProductos = new ArrayList<>();
@@ -39,8 +45,11 @@ public class RealizarPedido2 extends JFrame {
         return nombresProductos;
     }
 
-	public RealizarPedido2() {
+	public RealizarPedido2(String nombreProductoSeleccionado1, int cantidadProductoSeleccionada1) {
 		
+			this.nombreProductoSeleccionado1 = nombreProductoSeleccionado1;
+			this.cantidadProductoSeleccionada1 = cantidadProductoSeleccionada1;
+			
 		List<String> nombresProductos = cargarNombresProductos("C:/Users/Carlos Carrillo/eclipse-workspace/FinalProjectProgramacion/src/Archivos/Producto.txt");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,7 +137,12 @@ public class RealizarPedido2 extends JFrame {
 		});
 		contentPane.add(btnNewButton_5);
 	}
-	
+
+
+	public RealizarPedido2() {
+		
+	}
+
 	public void solicitarCantidad(String producto) {
 		JDialog dialog = new JDialog(this, "Cantidad", true);
 		dialog.setSize(300, 200);
@@ -148,8 +162,9 @@ public class RealizarPedido2 extends JFrame {
 
 	                if (cantidadNumerica >= 1 && cantidadNumerica <= 30) {
 	                    JOptionPane.showMessageDialog(null, "Cantidad ingresada para " + producto + ": " + cantidad);
+	                    
 	                    dialog.dispose(); // Cerrar la ventana secundaria
-	                    Final Final = new Final();
+	                    Final Final = new Final(nombreProductoSeleccionado1,cantidadProductoSeleccionada1, producto, cantidadNumerica);
 	    		        Final.setVisible(true);
 	                } else {
 	                    JOptionPane.showMessageDialog(null, "La cantidad debe estar entre 1 y 30 unidades.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -175,7 +190,7 @@ public class RealizarPedido2 extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				RealizarPedido1 frame = new RealizarPedido1();
+				RealizarPedido2 frame = new RealizarPedido2();
 				frame.setVisible(true);
 			}
 		});

@@ -21,9 +21,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class RealizarPedido1 extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private int cantidadProducto1;
-	private int cantidadProducto2;
+
 
 	private List<String> cargarNombresProductos(String rutaArchivo) {
         List<String> nombresProductos = new ArrayList<>();
@@ -152,7 +155,7 @@ public class RealizarPedido1 extends JFrame {
 	                if (cantidadNumerica >= 1 && cantidadNumerica <= 30) {
 	                    JOptionPane.showMessageDialog(null, "Cantidad ingresada para " + producto + ": " + cantidad);
 	                    dialog.dispose(); // Cerrar la ventana secundaria
-	                    RealizarPedido2 realizarPedido2 = new RealizarPedido2();
+	                    RealizarPedido2 realizarPedido2 = new RealizarPedido2(producto,cantidadNumerica);
 	                    realizarPedido2.setVisible(true);
 	                } else {
 	                    JOptionPane.showMessageDialog(null, "La cantidad debe estar entre 1 y 30 unidades.", "Error", JOptionPane.ERROR_MESSAGE);
